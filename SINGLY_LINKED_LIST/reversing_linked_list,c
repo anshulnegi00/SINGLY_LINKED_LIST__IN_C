@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *link;
+};
+
+void revlinkedlist(struct node**);
+
+int main()
+{
+    struct node *head=NULL;
+    struct node *temp;
+    struct node *newnode;
+
+    int choice=1;
+    while(choice)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("ENTER DATA\n");
+        scanf("%d",&newnode->data);
+        newnode->link=NULL;
+
+        if(head==NULL)
+        {
+            head=temp=newnode;
+        }
+
+        else
+        {
+            temp->link=newnode;
+            temp=newnode;
+        }
+
+        printf("DO YOU WANT TO CONTINUE 0|1");
+        scanf("%d",&choice); 
+    }
+
+        printf("PRINTING BEFORE REVERSING\n");
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf("%d\n",temp->data);
+            temp=temp->link;
+        }
+
+        revlinkedlist(&head);
+
+        printf("PRINTING AFTER REVERSING\n");
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf("%d\n",temp->data);
+            temp=temp->link;
+        }
+
+}
+
+
+void revlinkedlist(struct node** headref)
+{
+    struct node *currentnode=*headref;
+    struct node *previousnode=NULL;
+    struct node *nextnode=NULL;
+
+    while(currentnode!=NULL)
+    {
+        nextnode=currentnode->link;
+        currentnode->link=previousnode;
+        previousnode=curresntnode;
+        currentnode=nextnode;
+    }
+    *headref=previousnode;
+}
+
+
